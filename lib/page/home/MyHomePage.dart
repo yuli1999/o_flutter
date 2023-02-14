@@ -1,15 +1,41 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:one_flutter/common/Global.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: GestureDetector(
+        onTap: () {
+          Map<String, Object> map = {
+            "test": "555",
+          };
+          invokeNativeMethod("test", map);
+        },
+        child: Container(
+          alignment: Alignment.center,
+          width: double.infinity,
+          height: double.infinity,
+          child: const Text("点击"),
+        ),
+      ),
+    );
   }
+}
+
+// 获取原生的值 向原生发送消息
+invokeNativeMethod(String method, Map<String, Object> map) async {
+  dynamic args;
+  try {
+    args = await Global.method.invokeMethod(method, map);
+  } on PlatformException catch (e) {}
 }

@@ -13,21 +13,37 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: GestureDetector(
-        onTap: () {
-          Map<String, Object> map = {
-            "test": "555",
-          };
-          invokeNativeMethod("test", map);
-        },
-        child: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          height: double.infinity,
-          child: const Text("点击"),
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: () {
+            Map<String, Object> map = {
+              "test": "555",
+            };
+            invokeNativeMethod("test", map);
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: double.infinity,
+            child: const Text("点击"),
+          ),
         ),
-      ),
+        Positioned(
+          top: 100,
+          left: 60,
+          child: GestureDetector(
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+            child: const Image(
+              width: 80,
+              height: 80,
+              image: AssetImage('assets/images/ic_head.png'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:one_flutter/common/Global.dart';
 import 'package:one_flutter/page/home/MyHomePage.dart';
 import 'package:one_flutter/page/type/TypePage.dart';
@@ -94,6 +95,7 @@ class _HomePageState extends State<HomePage> {
           }
         },
       ),
+      drawer: Drawer(width: 200, child: Container()),
       body: Stack(
         alignment: Alignment.center,
         children: [
